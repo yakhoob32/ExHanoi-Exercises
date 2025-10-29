@@ -1,10 +1,15 @@
 def hanoi(a, b, c, n):
-    if n == 1:
+    if n <= 0 :
+        return
+    
+    if n == 1 :
         c.append(a.pop())
-    else:
-        hanoi(a, c, b, n - 1)
-        c.append(a.pop())
-        hanoi(b, a, c, n - 1)
+        return
+    
+    hanoi(a, c, b, n - 1)
+    # moves.push([from, to])
+    c.append(a.pop())
+    hanoi(b, a, c, n - 1)
 
 
 def ex_2(a, b, c, d, n) :
@@ -23,14 +28,21 @@ def ex_2(a, b, c, d, n) :
 
 
 def ex_1(a, b, c, n) :
-    if n == 1 :
+    if n == 1:
+        c.append(a.pop())
+        a.append(b.pop())
+        a.append(c.pop())
+        c.append(b.pop())
         b.append(a.pop())
-        hanoi(b, a, c, 3*n)
-    else :
-        ex_1(a, b, c, n - 1)
+        c.append(a.pop())
+        c.append(b.pop())
+    else:
+        ex_1(A, B, C, n - 1)
         b.append(a.pop())
-        hanoi(c, a, b, n*3)
-        hanoi(b, a, c, (n+1)*3)
+        hanoi(C, A, B, 6*(n-1))
+        hanoi(B, A, C, 6*n-3)
+
+
 
 A = [6, 12]
 B = [4, 5, 10, 11]

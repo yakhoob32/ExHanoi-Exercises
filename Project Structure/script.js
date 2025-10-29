@@ -54,26 +54,26 @@ function hanoi(from, via, to, n) {
     hanoi(via, from, to, n - 1);
 }
 
-function exHanoi_1(start, aux, end, n) {
+function exHanoi_1(A, B, C, n) {
     if (n <= 0) {
         return;
     }
     if (n === 1) {
-        moves.push([start, end])
-        moves.push([aux, start])
-        moves.push([end, start])
-        moves.push([aux, end])
-        moves.push([start, aux])
-        moves.push([start, end])
-        moves.push([aux, end])
+        moves.push([A, C]);
+        moves.push([B, A]);
+        moves.push([C, A]);
+        moves.push([B, C]);
+        moves.push([A, B]);
+        moves.push([A, C]);
+        moves.push([B, C]);
+        return;
     }
 
     else {
-        exHanoi_1(start, aux, end, n - 1);
-        moves.push([start, aux]);
-        hanoi(end, aux, start, 3*n);
-        hanoi(aux, start, end, 3*(n-1));
-        hanoi(start, aux, end, 3*n)
+        exHanoi_1(A, B, C, n - 1);
+        moves.push([A, B]);
+        hanoi(C, A, B, 6*(n - 1));
+        hanoi(B, A, C, 6*n - 3);
     }
 }
 
@@ -84,8 +84,20 @@ function exHanoi_2(A, B, C, D, n) {
 }
 
 function exhanoi_3(A, B, C, n) {
-    alert("your function is not complete")
-    return
+    if (n <= 0) {
+        return;
+    }
+    if (n === 1) {
+        moves.push([A, C]);
+        hanoi(B, A, C, 2);
+        return;
+    }
+    else {
+        hanoi(A, B, C, n - 1);
+        hanoi(C, A, B, 3*(n - 1));
+        moves.push([A, C]);
+        hanoi(B, A, C, 3*n - 1);
+    }
 }
 
 // before coding read about the extra rules for this ExHanoi
