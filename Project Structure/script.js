@@ -59,16 +59,21 @@ function exHanoi_1(start, aux, end, n) {
         return;
     }
     if (n === 1) {
-        moves.push([start, aux]);
-        hanoi(aux, start, end, 3*n);
-        return;
+        moves.push([start, end])
+        moves.push([aux, start])
+        moves.push([end, start])
+        moves.push([aux, end])
+        moves.push([start, aux])
+        moves.push([start, end])
+        moves.push([aux, end])
     }
 
     else {
         exHanoi_1(start, aux, end, n - 1);
         moves.push([start, aux]);
-        hanoi(end, start, aux, 3*n);
-        hanoi(aux, start, end, (n+1)*3);
+        hanoi(end, aux, start, 3*n);
+        hanoi(aux, start, end, 3*(n-1));
+        hanoi(start, aux, end, 3*n)
     }
 }
 
