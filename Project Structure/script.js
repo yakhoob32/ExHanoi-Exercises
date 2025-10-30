@@ -105,8 +105,9 @@ function exhanoi_4(A, B, C, D, n) {
     if (n <= 0) {
         return;
     }
-    if (n === 0) {
+    if (n === 1) {
         moves.push([A, C]);
+        return;
     }
     else {
         exhanoi_4(A, B, D, C, n - 1);
@@ -118,8 +119,22 @@ function exhanoi_4(A, B, C, D, n) {
 
 // before coding read about the extra rules for this ExHanoi
 function exhanoi_5(A, B, C, D, n) {
-    alert("your function is not complete")
-    return
+    if (n <= 0) {
+        return;
+    }
+    if (n === 0) {
+        exhanoi_4(C, B, D, A, 3);
+        moves.push([A, C]);
+        exhanoi_4(B, A, C, D, 2);
+        exhanoi_4(D, A, C, B, 3);
+    }
+    else {
+        exhanoi_5(A, B, C, D, n - 1)
+        exhanoi_4(C, B, D, A, 6 * n - 3)
+        moves.push([A, C])
+        exhanoi_4(B, A, C, D, 2)
+        exhanoi_4(D, A, C, B, 6 * n - 3)
+    }
 
 }
 
