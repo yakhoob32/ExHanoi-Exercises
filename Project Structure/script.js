@@ -118,24 +118,67 @@ function exhanoi_4(A, B, C, D, n) {
 }
 
 // before coding read about the extra rules for this ExHanoi
+// function exhanoi_5(A, B, C, D, n) {
+//     if (n <= 0) {
+//         return;
+//     }
+//     if (n === 1) {
+//         exhanoi_4(C, B, D, A, 3);
+//         moves.push([A, C]);
+//         exhanoi_4(B, D, C, A, 2);
+//         exhanoi_4(D, A, C, B, 3);
+//     }
+//     else {
+//         exhanoi_5(A, B, C, D, n - 1)
+//         exhanoi_4(C, B, D, A, 6 * n - 3)
+//         moves.push([A, C])
+//         exhanoi_4(B, A, C, D, 2)
+//         exhanoi_4(D, A, C, B, 6 * n - 3)
+//     }
+// }
+
 function exhanoi_5(A, B, C, D, n) {
     if (n <= 0) {
         return;
     }
-    if (n === 0) {
-        exhanoi_4(C, B, D, A, 3);
-        moves.push([A, C]);
-        exhanoi_4(B, A, C, D, 2);
-        exhanoi_4(D, A, C, B, 3);
-    }
-    else {
-        exhanoi_5(A, B, C, D, n - 1)
-        exhanoi_4(C, B, D, A, 6 * n - 3)
-        moves.push([A, C])
-        exhanoi_4(B, A, C, D, 2)
-        exhanoi_4(D, A, C, B, 6 * n - 3)
+    if (n === 1) {
+        moves.push([C, D]); moves.push([C, B]); moves.push([D, C]); moves.push([C, B]);
+        moves.push([A, D]); moves.push([C, D]); moves.push([D, A]); moves.push([D, C]);
+        moves.push([B, C]); moves.push([B, A]); moves.push([C, D]); moves.push([D, A]);
+        moves.push([B, C]); moves.push([C, D]); moves.push([B, C]); moves.push([D, C]);
+        moves.push([A, B]); moves.push([A, D]); moves.push([B, C]); moves.push([C, D]);
+        moves.push([A, B]); moves.push([B, C]); moves.push([D, A]); moves.push([A, B]);
+        moves.push([D, C]); moves.push([B, C]);
     }
 
+    else {
+        exhanoi_5(A, B, C, D, n - 1)
+        moves.push([A, D])
+        hanoi_ex_5(C, D, A, B, 6 * n - 1)
+        moves.push([D, C])
+        moves.push([B, C])
+        moves.push([C, D])
+        moves.push([B, C])
+        moves.push([D, C])
+        hanoi_ex_5(A, B, C, D,6 * n - 1)
+    }
+}
+
+function hanoi_ex_5(A, B, C, D, n) {
+    if (n <= 0) {
+        return;
+    }
+    if (n === 1) {
+        moves.push([A, D])
+        moves.push([D, C])
+    }
+    else {
+        hanoi_ex_5(A, B, C, D, n - 1)
+        moves.push([A, B])
+        hanoi_ex_5(C, D, A, B, n - 1)
+        moves.push([B, C])
+        hanoi_ex_5(A, B, C, D, n - 1)
+    }
 }
 
 function moveDisks(from, to){
